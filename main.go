@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -36,6 +37,16 @@ func onMessage(discord *discordgo.Session, message *discordgo.MessageCreate) {
 	if message.Author.ID == discord.State.User.ID {
 		return
 	} else {
-		discord.ChannelMessageSend(message.ChannelID, message.Content)
+		if strings.HasPrefix(message.Content, "&go") {
+			var messages []*discordgo.Message
+			var err error
+			messages, err = discord.ChannelMessages(message.ChannelID, 100, "", "", "")
+			if err != nil {
+				fmt.Println(err.Error())
+				return
+			}
+
+			discord.ChannelMessageSend(message.ChannelID, messages[99].Content)
+		}
 	}
 }
