@@ -19,7 +19,7 @@ func main() {
 	discord.Identify.Intents = discordgo.IntentsGuildMessages
 
 	// Event handlers
-	discord.AddHandler(messageHandler)
+	discord.AddHandler(onMessage)
 
 	err = discord.Open()
 	defer discord.Close()
@@ -32,8 +32,8 @@ func main() {
 	}
 }
 
-func messageHandler(discord *discordgo.Session, message *discordgo.MessageCreate) {
-	if message.Author.Username == discord.State.User.ID {
+func onMessage(discord *discordgo.Session, message *discordgo.MessageCreate) {
+	if message.Author.ID == discord.State.User.ID {
 		return
 	} else {
 		discord.ChannelMessageSend(message.ChannelID, message.Content)
