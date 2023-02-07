@@ -15,7 +15,7 @@ func main() {
 		fmt.Println(err.Error())
 		return
 	}
-
+  //
 	// Intents
 	discord.Identify.Intents = discordgo.IntentsGuildMessages
 
