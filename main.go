@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	var token string = "MTA3MTgwOTYyNDcxOTc3Mzc1Ng.G4nkQ0.TS_LRZRuya9BJZX-WC5ZIOc0_IYgsom1PcW8-c"
+	var token string = "TOKEN"
 
 	discord, err := discordgo.New("Bot " + token)
 	if err != nil {
